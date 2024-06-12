@@ -8,21 +8,13 @@ The standard Fedora installation process for Xfce desktop includes additional pa
 
 ## Requirements
 
-* A debian installation (hardware or virtual machine) with appropriate video drivers.
+* A Fedora netinstall LIVE USB.
 
 * sudo privileges to install packages and run optional install script.
 
-* Installation of `git` to clone this repo `sudo pkg install git`
+## ISO for installing Fedora
 
-* Installation of `bash` to run install script `sudo pkg install bash`
-
-## ISO for Installing Debian
-
-* [debian-12.4.0-amd64-netinst.iso](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso)
-
-* [Installing Debian 12](https://www.debian.org/releases/bookworm/debian-installer/)
-
-* [Debian “bookworm” Release Information](https://www.debian.org/releases/bookworm/)
+* [Download Fedora Everything net installer](https://alt.fedoraproject.org/)
 
 ## Installing Debian without a desktop environment
 
