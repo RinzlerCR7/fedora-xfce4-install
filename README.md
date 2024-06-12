@@ -2,9 +2,9 @@ Brother, I'll update the content. I'm new to Github so using your stuff as a ref
 
 ![debian-xfce.jpg](debian-xfce.jpg)
 
-## Debian Xfce4 Minimal Install Guide
+## Fedora Xfce4 Install Guide
 
-The standard Debian installation process for Xfce desktop includes additional packages that may not be necessary for many users. This guide will allow you to install a minimal Xfce desktop, adding additional packages as needed.
+The standard Fedora installation process for Xfce desktop includes additional packages that may not be necessary for many users. This guide will allow you to install a minimal Xfce desktop, adding additional packages as needed.
 
 ## Requirements
 
