@@ -18,7 +18,9 @@ The standard Fedora installation process for Xfce desktop includes additional pa
 
 ## Installing Fedora with Xfce4
 
-In the Software Selection menu, select Xfce Desktop as the base environment & add the following additional softwares for the selected environment,
+In the Software Selection menu, select `Xfce Desktop` as the base environment & add the following additional softwares for the selected environment,
+* `Applications for the Xfce Desktop`
+* `Multimedia support for Xfce`
 
 ## Installing Debian without a desktop environment
 
