@@ -19,9 +19,36 @@ The standard Fedora installation process for Xfce desktop includes additional pa
 ## Installing Fedora with Xfce4
 
 In the Software Selection menu, select `Xfce Desktop` as the base environment & add the following additional softwares for the selected environment,
+
 * `Applications for the Xfce Desktop`
+
 * `Multimedia support for Xfce`
+
 Note: You can skip these too maybe, installs a lot of crap.
+
+## Switching from LightDM to SDDM
+
+LightDM was randomly causing Black Screen during some of my system startups. If it happens with you too, switch to SDDM.
+
+Remove LightDM:
+
+```bash
+sudo dnf remove lightdm
+```
+
+Install SDDM:
+
+```bash
+sudo dnf install sddm
+```
+
+After this, if SDDM doesn't automatically start on restart, use the following command:
+
+```bash
+sudo systemctl start sddm
+```
+
+# ARCHIVE
 
 ## Installing Debian without a desktop environment
 
