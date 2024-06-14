@@ -16,6 +16,10 @@ The standard Fedora installation process for Xfce desktop includes additional pa
 
 * [Download Fedora Everything net installer](https://alt.fedoraproject.org/)
 
+## Installing Fedora with Xfce4
+
+During the initial installation, select Xfce4
+
 ## Installing Debian without a desktop environment
 
 As you progress through the debian installation, towards the end you will be presented with the following screen for Software selection:
