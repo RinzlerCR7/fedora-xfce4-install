@@ -78,9 +78,10 @@ Execute:
 ```bash
 sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
 ```
+
 ### Step #5: Wait for the kernel modules to load up
 You must wait 5-10 minutes for the kernel modules to load. Please do not proceed to the next steps immediately.
-(Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc so put it here.)
+Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc so put it here.
 
 ### Step #6: Read from the updated kernel modules
 Execute:
@@ -89,7 +90,7 @@ sudo akmods --force
 sudo dracut --force
 ```
 
-Note: DO NOT restart after this step. Give me black screen.
+Note: DO NOT restart after this step. Gives me black screen.
 
 ### Step #7: Edit the X11 configuration
 Install `xrandr` package.
