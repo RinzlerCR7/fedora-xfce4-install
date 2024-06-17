@@ -19,9 +19,7 @@ The standard Fedora installation process for Xfce desktop includes additional pa
 ## Installing Fedora with Xfce4
 
 In the Software Selection menu, select `Xfce Desktop` as the base environment & add the following additional softwares for the selected environment,
-
 * `Applications for the Xfce Desktop`
-
 * `Multimedia support for Xfce`
 
 Note: You can skip these too maybe, installs a lot of crap.
@@ -42,11 +40,138 @@ Install SDDM:
 sudo dnf install sddm
 ```
 
-After this, if SDDM doesn't automatically start on restart, use the following command:
+After this, if SDDM doesn't automatically start on restart, use the following command. (Note: I don't remember if I've used this command. So it might be wrong.):
 
 ```bash
 sudo systemctl start sddm
 ```
+
+## Installing proprietary NVIDIA graphics card driver
+
+Reference docs:
+* [How to Set Nvidia as Primary GPU on Optimus-based Laptops](https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/)
+* [Third-Party Repositories](https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/)
+
+Prerequisites:
+* This guide requires the secure boot to be turned off to load up the unsigned NVIDIA kernel modules.
+
+### Step #1: Update from the existing repositories
+Execute:
+```bash
+sudo dnf update
+```
+
+### Step #2: Add the RPM Fusion repository for NVIDIA drivers
+Execute:
+```bash
+sudo dnf config-manager --set-enable rpmfusion-nonfree-nvidia-driver
+```
+
+### Step #3: Update from the newly added repositories
+Execute:
+```bash
+sudo dnf update --refresh
+```
+
+### Step #4: Install the driver & its dependencies
+Execute:
+```bash
+sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+```
+### Step #5: Wait for the kernel modules to load up
+You must wait 5-10 minutes for the kernel modules to load. Please do not proceed to the next steps immediately.
+(Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc so put it here.)
+
+### Step #6: Read from the updated kernel modules
+Execute:
+```bash
+sudo akmods --force
+sudo dracut --force
+```
+
+Note: DO NOT restart after this step. Give me black screen.
+
+### Step #7: Edit the X11 configuration
+Install `xrandr` package.
+```bash
+sudo dnf install xrandr
+```
+
+Edit the `nvidia.conf` from `/usr/share/X11/xorg.conf.d/` to add
+```bash
+Option "PrimaryGPU" "yes"
+```
+in the `OutputClass` section of it.
+
+For example, use `MousePad` with root privileges to edit the `nvidia.conf` file. Use the following command to launch `MousePad` as root.
+```bash
+sudo MousePad
+```
+Then open `nvidia.conf` file in `MousePad` from `/usr/share/X11/xorg.conf.d/` & make the required changes.
+
+The file should look similar to this.
+```bash
+#This file is provided by xorg-x11-drv-nvidia
+#Do not edit
+
+Section "OutputClass"
+    Identifier "nvidia"
+    MatchDriver "nvidia-drm"
+    Driver "nvidia"
+    Option "AllowEmptyInitialConfiguration"
+    Option "SLI" "Auto"
+    Option "BaseMosaic" "on"
+    Option "PrimaryGPU" "yes"
+EndSection
+
+Section "OutputClass"
+    Identifier "layout"
+    Option "AllowNVIDIAGPUScreens"
+EndSection
+```
+You can see the additions in both sections.
+
+Execute the following command to copy the display render details for the X11.
+```bash
+sudo cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
+```
+
+Edit the `Xsetup` file from `/etc/sddm/` to add:
+```bash
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+xrandr --dpi 96
+```
+
+Restart SDDM:
+```bash
+systemctl restart sddm
+```
+
+### Step #8: Reboot your system
+Reboot your system and proceed to the next steps to verify the change in configuration.
+```bash
+sudo reboot
+```
+
+### Step #9: Verify the configuration
+Execute:
+```bash
+glxinfo | egrep "OpenGL vendor|OpenGL renderer"
+```
+It should show your NVIDIA GPU.
+
+Execute:
+```bash
+neofetch
+```
+It should show your NVIDIA GPU under the GPU name.
+
+Execute:
+```bash
+glxgears
+```
+It should display 3D OpenGL graphics by running `glxgears` program.
 
 # ARCHIVE
 
