@@ -22,7 +22,7 @@ In the Software Selection menu, select `Xfce Desktop` as the base environment & 
 * `Applications for the Xfce Desktop`
 * `Multimedia support for Xfce`
 
-Note: You can skip these too maybe, installs a lot of crap.
+_Note: You can skip these too maybe, installs a lot of crap._
 
 ## Switching from LightDM to SDDM
 
@@ -40,8 +40,8 @@ Install SDDM:
 sudo dnf install sddm
 ```
 
-After this, if SDDM doesn't automatically start on restart, use the following command. (Note: I don't remember if I've used this command. So it might be wrong.):
-
+After this, if SDDM doesn't automatically start on restart, use the following command.
+_Note: I don't remember if I've used this command. So it might be wrong._
 ```bash
 sudo systemctl start sddm
 ```
@@ -81,7 +81,7 @@ sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidi
 
 ### Step #5: Wait for the kernel modules to load up
 You must wait 5-10 minutes for the kernel modules to load. Please do not proceed to the next steps immediately.
-Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc so put it here.
+_Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc so put it here._
 
 ### Step #6: Read from the updated kernel modules
 Execute:
@@ -90,7 +90,7 @@ sudo akmods --force
 sudo dracut --force
 ```
 
-Note: DO NOT restart after this step. Gives me black screen.
+_Note: DO NOT restart after this step. Gives me black screen._
 
 ### Step #7: Edit the X11 configuration
 Install `xrandr` package.
