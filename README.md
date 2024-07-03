@@ -81,7 +81,7 @@ sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidi
 
 ### Step #5: Wait for the kernel modules to load up
 You must wait 5-10 minutes for the kernel modules to load. Please do not proceed to the next steps immediately.
-_Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc, so putting it here._
+_(Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc, so putting it here.)_
 
 ### Step #6: Read from the updated kernel modules
 Execute:
