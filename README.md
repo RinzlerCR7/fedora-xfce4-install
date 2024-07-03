@@ -49,8 +49,10 @@ sudo systemctl start sddm
 ## Installing proprietary NVIDIA graphics card driver
 
 Reference docs:
+* [NVIDIA](https://rpmfusion.org/Howto/NVIDIA)
 * [How to Set Nvidia as Primary GPU on Optimus-based Laptops](https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/)
 * [Configuration](https://rpmfusion.org/Configuration)
+* [Optimus](https://rpmfusion.org/Howto/Optimus)
 * [Third-Party Repositories](https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/)
 
 Prerequisites:
@@ -84,9 +86,11 @@ _Note: Reboot if not on the latest kernel._
 
 Execute:
 ```bash
+sudo dnf install gcc
+sudo dnf install automake
 sudo dnf install akmod-nvidia
 sudo dnf install xorg-x11-drv-nvidia-cuda
-sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+sudo dnf install xorg-x11-drv-nvidia-libs.i686
 ```
 
 ### Step #5: Wait for the kernel modules to load up
@@ -99,6 +103,18 @@ modinfo -F version nvidia
 ```
 should outputs the version of the driver such as `440.64` & not `modinfo: ERROR: Module nvidia not found.`
 
+### Switching between nouveau/nvidia
+```bash
+rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1
+```
+
+### Step #6: Using KMS, add NVIDIA modeset argument
+Execute:
+```bash
+sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
+```
+
+### DELETE
 ### Step #6: Read from the updated kernel modules
 Execute:
 ```bash
@@ -107,6 +123,25 @@ sudo dracut --force
 ```
 
 _Note: DO NOT restart after this step. Gives me black screen._
+
+### Step #7: Install Vulkan
+Execute:
+```bash
+sudo dnf install vulkan
+```
+
+### Step #8: Install NVENC/NVDEC
+Execute:
+```bash
+sudo dnf install xorg-x11-drv-nvidia-cuda-libs
+```
+
+### Step #9: Install VDPAU/VAAPI
+Execute:
+```bash
+sudo dnf install nvidia-vaapi-driver libva-utils vdpauinfo
+```
+
 
 ### Step #7: Edit the X11 configuration
 Install `xrandr` package.
@@ -330,4 +365,8 @@ Launch `qt5ct` and configure the theme and fonts.
 Execute:
 ```bash
 sudo dnf config-manager --set-enable rpmfusion-nonfree-nvidia-driver
+```
+
+```bash
+sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
 ```
