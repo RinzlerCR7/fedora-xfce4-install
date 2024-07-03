@@ -50,6 +50,7 @@ sudo systemctl start sddm
 
 Reference docs:
 * [How to Set Nvidia as Primary GPU on Optimus-based Laptops](https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/)
+* [Configuration](https://rpmfusion.org/Configuration)
 * [Third-Party Repositories](https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/)
 
 Prerequisites:
@@ -61,10 +62,11 @@ Execute:
 sudo dnf update
 ```
 
-### Step #2: Add the RPM Fusion repository for NVIDIA drivers
+### Step #2: Add the RPM Fusion nonfree repositories
 Execute:
 ```bash
-sudo dnf config-manager --set-enable rpmfusion-nonfree-nvidia-driver
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf config-manager --enable fedora-cisco-openh264
 ```
 
 ### Step #3: Update from the newly added repositories
@@ -76,12 +78,26 @@ sudo dnf update --refresh
 ### Step #4: Install the driver & its dependencies
 Execute:
 ```bash
+sudo dnf update -y
+```
+_Note: Reboot if not on the latest kernel._
+
+Execute:
+```bash
+sudo dnf install akmod-nvidia
+sudo dnf install xorg-x11-drv-nvidia-cuda
 sudo dnf install gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
 ```
 
 ### Step #5: Wait for the kernel modules to load up
 You must wait 5-10 minutes for the kernel modules to load. Please do not proceed to the next steps immediately.
 _(Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc, so putting it here.)_
+
+Once the module is built,
+```bash
+modinfo -F version nvidia
+```
+should outputs the version of the driver such as `440.64` & not `modinfo: ERROR: Module nvidia not found.`
 
 ### Step #6: Read from the updated kernel modules
 Execute:
@@ -308,3 +324,10 @@ sudo apt install qt5ct adwaita-qt
 ```
 
 Launch `qt5ct` and configure the theme and fonts.
+
+////////////////////////////////////////////////
+### Step #2: Add the RPM Fusion repository for NVIDIA drivers
+Execute:
+```bash
+sudo dnf config-manager --set-enable rpmfusion-nonfree-nvidia-driver
+```
