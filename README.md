@@ -40,8 +40,8 @@ Install SDDM:
 sudo dnf install sddm
 ```
 
-After this, if SDDM doesn't automatically start on restart, use the following command.\n
-_Note: I don't remember if I've used this command. So it might be wrong._
+After this, if SDDM doesn't automatically start on restart, use the following command.
+_(Note: I don't remember if I've used this command. So it might be wrong.)_
 ```bash
 sudo systemctl start sddm
 ```
