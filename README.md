@@ -135,6 +135,7 @@ Execute:
 ```bash
 sudo dnf install xorg-x11-drv-nvidia-cuda-libs
 ```
+_Note: xorg-x11-drv-nvidia-cuda already covers this installation._
 
 ### Step #9: Install VDPAU/VAAPI
 Execute:
