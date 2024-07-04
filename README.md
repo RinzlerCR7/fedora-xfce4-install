@@ -108,12 +108,6 @@ Execute:
 ```bash
 sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
 ```
-
-### Switching between nouveau/nvidia
-```bash
-rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1
-```
-
 _Note: DO NOT restart after this step. Gives me black screen._
 
 ### Step #7: Install Vulkan
