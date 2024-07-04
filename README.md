@@ -59,32 +59,30 @@ Prerequisites:
 * This guide requires the secure boot to be turned off to load up the unsigned NVIDIA kernel modules.
 
 ### Step #1: Update from the existing repositories
-Execute:
 ```bash
 sudo dnf update
 ```
 
 ### Step #2: Add the RPM Fusion nonfree repositories
-Execute:
+Install nonfree repositories & enable fedora-cisco-openh264 repository:
 ```bash
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf config-manager --enable fedora-cisco-openh264
 ```
 
-### Step #3: Update from the newly added repositories
-Execute:
+### Step #3: Refresh to add the new repositories
 ```bash
 sudo dnf update --refresh
 ```
 
 ### Step #4: Install the driver & its dependencies
-Execute:
+Update the system:
 ```bash
 sudo dnf update -y
 ```
 _Note: Reboot if not on the latest kernel._
 
-Execute:
+Install the following packages:
 ```bash
 sudo dnf install gcc
 sudo dnf install automake
@@ -103,33 +101,30 @@ modinfo -F version nvidia
 ```
 should outputs the version of the driver such as `440.64` & not `modinfo: ERROR: Module nvidia not found.`
 
-### Step #6: Using KMS, add NVIDIA modeset argument
-Execute:
+### Step #6: Using KMS, add NVIDIA modeset argument to kernel boot parameters
 ```bash
 sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
 ```
 _Note: DO NOT restart after this step. Gives me black screen._
 
-### Step #7: Install Vulkan
-Execute:
+### Step #7: Install the following packages
+Install `Vulkan`:
 ```bash
 sudo dnf install vulkan
 ```
 
-### Step #8: Install NVENC/NVDEC
-Execute:
+Install `NVENC/NVDEC`:
 ```bash
 sudo dnf install xorg-x11-drv-nvidia-cuda-libs
 ```
 _Note: xorg-x11-drv-nvidia-cuda already covers this installation._
 
-### Step #9: Install VDPAU/VAAPI
-Execute:
+Install `VDPAU/VAAPI`:
 ```bash
 sudo dnf install nvidia-vaapi-driver libva-utils vdpauinfo
 ```
 
-### Step #10: Edit the X11 configuration
+### Step #8: Edit the X11 configuration
 Install `xrandr` package.
 ```bash
 sudo dnf install xrandr
@@ -169,7 +164,7 @@ EndSection
 ```
 You can see the additions in both sections.
 
-Execute the following command to copy the display render details for the X11.
+Execute the following command to copy the display render details for the X11:
 ```bash
 sudo cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
 ```
