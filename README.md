@@ -103,7 +103,7 @@ modinfo -F version nvidia
 ```
 should outputs the version of the driver such as `440.64` & not `modinfo: ERROR: Module nvidia not found.`
 
-### Step #6: Using KMS add NVIDIA modeset argument
+### Step #6: Using KMS, add NVIDIA modeset argument
 Execute:
 ```bash
 sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
@@ -216,6 +216,13 @@ Execute:
 glxgears
 ```
 It should display 3D OpenGL graphics by running `glxgears` program.
+
+## Switching between Nouveau/NVIDIA
+To boot using the Nouveau driver instead of the NVIDIA binary driver, edit the kernel entry from grub bootloader & remove the following linux boot command arguments,
+```bash
+rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1
+```
+then boot with the updated boot command.
 
 # ARCHIVE
 
