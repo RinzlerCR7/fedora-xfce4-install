@@ -125,7 +125,7 @@ sudo dnf install nvidia-vaapi-driver libva-utils vdpauinfo
 ```
 
 ### Step #8: Edit the X11 configuration
-Install `xrandr` package.
+Install `xrandr`:
 ```bash
 sudo dnf install xrandr
 ```
