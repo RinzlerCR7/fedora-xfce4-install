@@ -157,7 +157,7 @@ Section "OutputClass"
     Option "PrimaryGPU" "yes"
 EndSection
 
-Section "OutputClass"
+Section "ServerLayout"
     Identifier "layout"
     Option "AllowNVIDIAGPUScreens"
 EndSection
