@@ -30,19 +30,20 @@ LightDM was randomly causing Black Screen during some of my system startups. If 
 
 Remove LightDM:
 
-```bash
+```console
 sudo dnf remove lightdm
 ```
 
 Install SDDM:
 
-```bash
+```console
 sudo dnf install sddm
 ```
 
 After this, if SDDM doesn't automatically start on restart, use the following command.
 _(Note: I don't remember if I've used this command. So it might be wrong.)_
-```bash
+
+```console
 sudo systemctl start sddm
 ```
 
@@ -59,31 +60,37 @@ Prerequisites:
 * This guide requires the secure boot to be turned off to load up the unsigned NVIDIA kernel modules.
 
 ### Step #1: Update from the existing repositories
-```bash
+
+```console
 sudo dnf update
 ```
 
 ### Step #2: Add the RPM Fusion nonfree repositories
 Install nonfree repositories & enable fedora-cisco-openh264 repository:
-```bash
+
+```console
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf config-manager --enable fedora-cisco-openh264
 ```
 
 ### Step #3: Refresh to add the new repositories
-```bash
+
+```console
 sudo dnf update --refresh
 ```
 
 ### Step #4: Install the driver & its dependencies
 Update the system:
-```bash
+
+```console
 sudo dnf update -y
 ```
+
 _Note: Reboot if not on the latest kernel._
 
 Install the following packages:
-```bash
+
+```console
 sudo dnf install gcc
 sudo dnf install automake
 sudo dnf install akmod-nvidia
