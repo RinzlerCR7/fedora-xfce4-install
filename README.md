@@ -246,6 +246,13 @@ rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1
 
 then boot with the updated boot command.
 
+## Reference docs:
+* [NVIDIA](https://rpmfusion.org/Howto/NVIDIA)
+* [How to Set Nvidia as Primary GPU on Optimus-based Laptops](https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/)
+* [Configuration](https://rpmfusion.org/Configuration)
+* [Optimus](https://rpmfusion.org/Howto/Optimus)
+* [Third-Party Repositories](https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/)
+
 # ARCHIVE
 
 ## Installing Debian without a desktop environment
