@@ -49,13 +49,6 @@ sudo systemctl start sddm
 
 ## Installing proprietary NVIDIA graphics card driver
 
-Reference docs:
-* [NVIDIA](https://rpmfusion.org/Howto/NVIDIA)
-* [How to Set Nvidia as Primary GPU on Optimus-based Laptops](https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/)
-* [Configuration](https://rpmfusion.org/Configuration)
-* [Optimus](https://rpmfusion.org/Howto/Optimus)
-* [Third-Party Repositories](https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/)
-
 Prerequisites:
 * This guide requires the secure boot to be turned off to load up the unsigned NVIDIA kernel modules.
 
