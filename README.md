@@ -103,54 +103,68 @@ You must wait 5-10 minutes for the kernel modules to load. Please do not proceed
 _(Note: I'm not sure if it is necessary to wait. I've never tried not waiting. Just saw it in the doc, so putting it here.)_
 
 Once the module is built,
-```bash
+
+```console
 modinfo -F version nvidia
 ```
+
 should outputs the version of the driver such as `440.64` & not `modinfo: ERROR: Module nvidia not found.`
 
 ### Step #6: Using KMS, add NVIDIA modeset argument to kernel boot parameters
-```bash
+
+```console
 sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
 ```
+
 _Note: DO NOT restart after this step. Gives me black screen._
 
 ### Step #7: Install the following packages
 Install `Vulkan`:
-```bash
+
+```console
 sudo dnf install vulkan
 ```
 
 Install `NVENC/NVDEC`:
-```bash
+
+```console
 sudo dnf install xorg-x11-drv-nvidia-cuda-libs
 ```
+
 _Note: xorg-x11-drv-nvidia-cuda already covers this installation._
 
 Install `VDPAU/VAAPI`:
-```bash
+
+```console
 sudo dnf install nvidia-vaapi-driver libva-utils vdpauinfo
 ```
 
 ### Step #8: Edit the X11 configuration
 Install `xrandr`:
-```bash
+
+```console
 sudo dnf install xrandr
 ```
 
 Edit the `nvidia.conf` from `/usr/share/X11/xorg.conf.d/` to add
-```bash
+
+```console
 Option "PrimaryGPU" "yes"
 ```
+
 in the `OutputClass` section of it.
 
 For example, use `MousePad` with root privileges to edit the `nvidia.conf` file. Use the following command to launch `MousePad` as root.
-```bash
+
+```console
 sudo MousePad
 ```
+
 Then open `nvidia.conf` file in `MousePad` from `/usr/share/X11/xorg.conf.d/` & make the required changes.
 
 The file should look similar to this.
-```bash
+
+```console
 #This file is provided by xorg-x11-drv-nvidia
 #Do not edit
 
@@ -169,55 +183,67 @@ Section "ServerLayout"
     Option "AllowNVIDIAGPUScreens"
 EndSection
 ```
+
 You can see the additions in both sections.
 
 Execute the following command to copy the display render details for the X11:
-```bash
+
+```console
 sudo cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
 ```
 
 Edit the `Xsetup` file from `/etc/sddm/` to add:
-```bash
+
+```console
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
-xrandr --dpi 96
 ```
 
 Restart SDDM:
-```bash
+
+```console
 systemctl restart sddm
 ```
 
 ### Step #11: Reboot your system
 Reboot your system and proceed to the next steps to verify the change in configuration.
-```bash
+
+```console
 sudo reboot
 ```
 
 ### Step #12: Verify the configuration
 Execute:
-```bash
+
+```console
 glxinfo | egrep "OpenGL vendor|OpenGL renderer"
 ```
+
 It should show your NVIDIA GPU.
 
 Execute:
-```bash
+
+```console
 neofetch
 ```
+
 It should show your NVIDIA GPU under the GPU name.
 
 Execute:
-```bash
+
+```console
 glxgears
 ```
+
 It should display 3D OpenGL graphics by running `glxgears` program.
 
 ## Switching between Nouveau/NVIDIA
 To boot using the Nouveau driver instead of the NVIDIA binary driver, edit the kernel entry from grub bootloader & remove the following linux boot command arguments,
-```bash
+
+```console
 rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1
 ```
+
 then boot with the updated boot command.
 
 # ARCHIVE
@@ -236,7 +262,7 @@ Update sources to `trixie`. The current testing branch.
 
 `sudo nano /etc/apt/sources`:
 
-```bash
+```console
 deb http://deb.debian.org/debian/ trixie main
 #deb-src http://deb.debian.org/debian/ trixie main
 
@@ -251,14 +277,14 @@ Add `contrib non-free-firmware` after each `main` entry if you need special driv
 
 The other option would be debian sid. Update `sources` as follows:
 
-```bash
+```console
 deb http://deb.debian.org/debian/ unstable main
 #deb-src http://deb.debian.org/debian/ unstable main
 ```
 
 Upgrade your system:
 
-```bash
+```console
 sudo apt update && apt upgrade
 ```
 
@@ -266,7 +292,7 @@ Reboot to load updated kernel and services.
 
 ## Quick install Xfce and required packages
 
-```bash
+```console
 git clone https://github.com/coonrad/Debian-Xfce4-Minimal-Install.git
 cd Debian-Xfce4-Minimal-Install
 sudo ./xfce-install.sh
@@ -276,7 +302,7 @@ sudo ./xfce-install.sh
 
 If you've read this far, and you're getting impatient:
 
-```bash
+```console
 sudo apt install xfce4
 ```
 
